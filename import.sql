@@ -3,27 +3,32 @@
 
 -- First get the sections
 DROP TABLE IF EXISTS sections;
-CREATE TABLE sections ( book TEXT, sectionNumber INTEGER, reference TEXT );
+CREATE TABLE sections ( book TEXT, sectionNumber INTEGER, reference TEXT, from_reference TEXT, to_reference TEXT, from_sblgnt INTEGER, to_sblgnt INTEGER, greek TEXT );
 
-CREATE TEMP TABLE _section_import ( sectionNumber INTEGER, canons TEXT, reference TEXT );
+CREATE TEMP TABLE _section_import ( sectionNumber INTEGER, canons TEXT, reference TEXT, from_reference TEXT, to_reference TEXT, from_sblgnt INTEGER, to_sblgnt INTEGER );
 
 .separator "\t"
 
-.import data/MAT-sections.txt _section_import
-INSERT INTO sections ( book, sectionNumber, reference ) SELECT 'MAT', sectionNumber, reference FROM _section_import;
+.import data/MAT-sections-aligned.txt _section_import
+INSERT INTO sections ( book, sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt ) SELECT 'MAT', sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt FROM _section_import;
 DELETE FROM _section_import;
 
-.import data/MRK-sections.txt _section_import
-INSERT INTO sections ( book, sectionNumber, reference ) SELECT 'MRK', sectionNumber, reference FROM _section_import;
+.import data/MRK-sections-aligned.txt _section_import
+INSERT INTO sections ( book, sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt ) SELECT 'MRK', sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt FROM _section_import;
 DELETE FROM _section_import;
 
-.import data/LUK-sections.txt _section_import
-INSERT INTO sections ( book, sectionNumber, reference ) SELECT 'LUK', sectionNumber, reference FROM _section_import;
+.import data/LUK-sections-aligned.txt _section_import
+INSERT INTO sections ( book, sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt ) SELECT 'LUK', sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt FROM _section_import;
 DELETE FROM _section_import;
 
-.import data/JHN-sections.txt _section_import
-INSERT INTO sections ( book, sectionNumber, reference ) SELECT 'JHN', sectionNumber, reference FROM _section_import;
+.import data/JHN-sections-aligned.txt _section_import
+INSERT INTO sections ( book, sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt ) SELECT 'JHN', sectionNumber, reference, from_reference, to_reference, from_sblgnt, to_sblgnt FROM _section_import;
 DELETE FROM _section_import;
+
+-- Add the Greek Text
+ATTACH '../sblgnt-to-sqlite/sblgnt.db' AS sblgnt;
+UPDATE sections SET greek=(SELECT group_concat(punctuated_text,' ') FROM sblgnt.sblgnt WHERE _id >= from_sblgnt AND _id <= to_sblgnt);
+-- ATTACH "C:\Users\Adam\Documents\Computational Bible\sblgnt-to-sqlite\sblgnt.db" AS sblgnt;
 
 -- Next get the canons
 
