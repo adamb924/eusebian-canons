@@ -2,6 +2,8 @@
 
 *(Substantial updates on December 4, 2005, including revisions to the data and alignment with the SBLGNT text.)*
 
+**NB: If you just want to look at the canons, you can view them in your browser at [https://eusebian-canons.adambaker.org/](https://eusebian-canons.adambaker.org/). If you're interested in the data, then this is the page for you.**
+
 This is an electronic version ([SQLite](https://www.sqlite.org/), JSON) of the [Eusebian canons](https://en.wikipedia.org/wiki/Eusebian_Canons). 
 The ‘original’ data is in the `data` folder in plaintext format. The files in the `json` and `sql` folders are generated with `import.sql`, e.g.,
 
