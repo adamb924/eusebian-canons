@@ -26,3 +26,20 @@ sqlSections.forEach(row => {
 
 let outputData = JSON.stringify(sections);
 fs.writeFileSync('json/sections.json', outputData);
+
+
+
+let canonJson = fs.readFileSync('json/canons.json');
+let canonTable = JSON.parse(canonJson);
+const gospels = ['MAT', 'MRK', 'LUK', 'JHN'];
+
+function byGospel(gospel) {
+    return canonTable
+        .filter(entry => entry[gospel] !== null)
+        .sort((a, b) => a[gospel] - b[gospel]);
+}
+
+let canonsByGospel = new Object();
+gospels.forEach((g) => canonsByGospel[g] = byGospel(g));
+let canonsByGospelOutput = JSON.stringify(canonsByGospel, null, 2);
+fs.writeFileSync('json/canonsByGospel.json', canonsByGospelOutput);
