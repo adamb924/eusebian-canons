@@ -1,0 +1,17 @@
+<div class="container">
+<header class="header">
+    <div class="grid-container" [class.one]="oneGospel" [class.two]="twoGospels" [class.three]="threeGospels" [class.four]="fourGospels">
+        @for( gospel of canon.gospels; track gospel ) {
+            <div class="title">{{title(gospel)}}</div>
+        }
+    </div>
+</header>
+
+<div id="table" class="grid-container" [class.one]="oneGospel" [class.two]="twoGospels" [class.three]="threeGospels" [class.four]="fourGospels">
+    @for( row of canon.data; track row ) {
+        @for( gospel of canon.gospels; track gospel ) {
+            <app-section-component [section]="row[gospel]" [gospel]="gospel"></app-section-component>
+        }
+    }
+</div>
+</div>

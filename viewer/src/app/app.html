@@ -1,0 +1,34 @@
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="over" role="navigation" (click)="drawer.toggle()" [fixedInViewport]="true">
+    <mat-nav-list>
+        <a mat-list-item routerLink="/"><mat-icon matListIcon>home</mat-icon> Home</a>
+        <mat-list-item>By Canon:</mat-list-item>
+        <a mat-list-item routerLink="/canon/1" class="indented">Canon I</a>
+        <a mat-list-item routerLink="/canon/2" class="indented">Canon II</a>
+        <a mat-list-item routerLink="/canon/3" class="indented">Canon III</a>
+        <a mat-list-item routerLink="/canon/4" class="indented">Canon IV</a>
+        <a mat-list-item routerLink="/canon/5" class="indented">Canon V</a>
+        <a mat-list-item routerLink="/canon/6" class="indented">Canon VI</a>
+        <a mat-list-item routerLink="/canon/7" class="indented">Canon VII</a>
+        <a mat-list-item routerLink="/canon/8" class="indented">Canon VIII</a>
+        <a mat-list-item routerLink="/canon/9" class="indented">Canon IX</a>
+        <a mat-list-item routerLink="/canon/10" class="indented">Canon X</a>
+        <mat-list-item>By Gospel:</mat-list-item>
+        <a mat-list-item routerLink="/gospel/MAT" class="indented">Ματθαίος</a>
+        <a mat-list-item routerLink="/gospel/MRK" class="indented">Μάρκος</a>
+        <a mat-list-item routerLink="/gospel/LUK" class="indented">Λουκάς</a>
+        <a mat-list-item routerLink="/gospel/KHN" class="indented">Ιωάννης</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="secondary" matBadgeColor="warn">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+    <span class="parent-span">Eusebian Canons</span>
+    </mat-toolbar-row> 
+    </mat-toolbar>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>
