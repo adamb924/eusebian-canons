@@ -127,19 +127,13 @@ SELECT * from canon6;
 SELECT * from canon7;
 
 .once json/canon8.json
+SELECT * from canon8;
+
+.once json/canon9.json
 SELECT * from canon9;
 
 .once json/canon10.json
-SELECT * from canon1;
-
-.once json/canon11.json
-SELECT * from canon1;
-
-.once json/canon12.json
-SELECT * from canon2;
-
-.once json/canon13.json
-SELECT * from canon3;
+SELECT * from canon10;
 
 .once json/sections-sql.json
 SELECT * from sections;
